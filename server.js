@@ -40,7 +40,6 @@ function getCategory(req, res) {
 }
 
 function createCategory(req, res) {
-  console.log(req.body);
   res.header('Content-Type', 'application/json');
   if (!req.body) {
     res.status(400).send(JSON.stringify({
@@ -61,14 +60,13 @@ function createCategory(req, res) {
 }
 
 function updateCategory(req, res) {
-  console.log(req.params.id);
   if (!req.body) {
     res.status(400).send(JSON.stringify({
       error: 'Invalid Request !'
     }));
   }
   else {
-    connection.query('UPDATE categories SET category_name = ? WHERE category_id = ?', [req.body.category_name, req.params.id], (err, results) => {
+    connection.query('UPDATE categories SET ? WHERE ?', [{category_name: req.body.category_name}, {category_id: req.params.id}], (err, results) => {
       if (err) {
         res.status(500).send(JSON.stringify({
           error: err.message
@@ -81,7 +79,7 @@ function updateCategory(req, res) {
 }
 
 function deleteCategory(req, res) {
-  connection.query('DELETE FROM categories WHERE category_id = ?', [req.params.id], (err, results) => {
+  connection.query('DELETE FROM categories WHERE ?', {category_id: req.params.id}, (err, results) => {
     if (err) {
       res.status(500).send(JSON.stringify({
         error: err.message
