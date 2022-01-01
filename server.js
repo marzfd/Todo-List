@@ -1,15 +1,15 @@
 import express from "express";
 import path from "path";
-import db from "./database.js";
+// import db from "./database.js";
+import config from "./config.js";
+
+const connection = config.connection;
+
 
 const app = express();
-const __dirname = path.resolve();
+app.use(express.json());
 
-app.use('/', express.static(path.join(__dirname, 'public')));
-
-app.get('/', (req, res) => {
-  res.status(200).send('Home Page');
-});
+app.use('/', express.static(path.join(path.resolve(), 'public')));
 
 // CATEGORIES
 
@@ -25,70 +25,71 @@ app.put('/categories/:id', (req, res) => updateCategory(req, res));
 // Delete Category
 app.delete('/categories/:id', (req, res) => deleteCategory(req, res));
 
+
 function getCategory(req, res) {
   res.header('Content-Type', 'application/json');
-  db.query('SELECT * FROM categories', (err, results) => {
+  connection.query('SELECT * FROM categories', (err, results) => {
     if (err) {
-      res.status(500).send(err);
-    }
-    else {
-      res.send(results);
+      res.status(500).send(JSON.stringify({
+        error: err.message
+      }));
+    } else {
+      res.status(200).send(JSON.stringify(results));
     }
   });
 }
 
 function createCategory(req, res) {
+  console.log(req.body);
+  res.header('Content-Type', 'application/json');
   if (!req.body) {
-    res.status(400).send('Invalid Request !');
+    res.status(400).send(JSON.stringify({
+      error: 'Invalid Request !'
+    }));
   }
   else {
-    const newCategory = {
-      category_name: req.body.category_name
-    };
-    db.query('INSERT INTO categories SET ?', newCategory, (err, results) => {
+    connection.query('INSERT INTO categories SET ?', {category_name: req.body.category_name}, (err, results) => {
       if (err) {
-        res.status(500).send(err);
-      }
-      else {
-        res.send(results);
+        res.status(500).send(JSON.stringify({
+          error: err.message
+        }));
+      } else {
+        res.status(200).send(JSON.stringify(results));
       }
     });
   }
 }
 
 function updateCategory(req, res) {
+  console.log(req.params.id);
   if (!req.body) {
-    res.status(400).send('Invalid Request !');
+    res.status(400).send(JSON.stringify({
+      error: 'Invalid Request !'
+    }));
   }
   else {
-    const category = data.find(category => category.category_id === req.params.id);
-    if (!category) {
-      res.status(404).send('Category not found !');
-    }
-    else {
-      category.category_name = req.body.category_name;
-      db.query('UPDATE categories SET ? WHERE category_id = ?', [category.category_name, req.params.id], (err, results) => {
-        if (err) {
-          res.status(500).send(err);
-        }
-        else {
-          res.send(results);
-        }
-      });
-    }
+    connection.query('UPDATE categories SET category_name = ? WHERE category_id = ?', [req.body.category_name, req.params.id], (err, results) => {
+      if (err) {
+        res.status(500).send(JSON.stringify({
+          error: err.message
+        }));
+      } else {
+        res.status(200).send(JSON.stringify(results));
+      }
+    });
   }
 }
 
 function deleteCategory(req, res) {
-  const category = data.find(category => category.category_id === req.params.id);
-  if (!category) {
-    res.status(404).send('Category not found !');
-  }
-  else {
-    const index = data.indexOf(category);
-    data.splice(index, 1);
-    res.send(data);
-  }
+  connection.query('DELETE FROM categories WHERE category_id = ?', [req.params.id], (err, results) => {
+    if (err) {
+      res.status(500).send(JSON.stringify({
+        error: err.message
+      }));
+    } else {
+      res.status(200).send(JSON.stringify(results));
+    }
+  });
 }
 
 // Start Server
