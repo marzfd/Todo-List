@@ -19,6 +19,6 @@ connection.connect(err => {
   console.log('Connected to database successfully !');
 });
 
-export default  {
+export default {
   connection : mysql.createConnection(config)
 };

@@ -1,10 +1,8 @@
 import express from "express";
 import path from "path";
-// import db from "./database.js";
 import config from "./config.js";
 
 const connection = config.connection;
-
 
 const app = express();
 app.use(express.json());
@@ -24,7 +22,6 @@ app.put('/categories/:id', (req, res) => updateCategory(req, res));
 
 // Delete Category
 app.delete('/categories/:id', (req, res) => deleteCategory(req, res));
-
 
 function getCategory(req, res) {
   res.header('Content-Type', 'application/json');
@@ -90,7 +87,6 @@ function deleteCategory(req, res) {
   });
 }
 
-
 // TASKS
 
 // Get Task
@@ -126,7 +122,7 @@ function createTask(req, res) {
     }));
   }
   else {
-    connection.query('INSERT INTO tasks SET ? , category_id = (SELECT category_id FROM categories WHERE category_name = ? )', [{task_name: req.body.task_name, is_done: req.body.is_done}, req.body.category_name], (err, results) => {
+    connection.query('INSERT INTO tasks SET ? ', {task_name: req.body.task_name, is_done: req.body.is_done, category_id: req.body.category_id}, (err, results) => {
       if (err) {
         res.status(500).send(JSON.stringify({
           error: err.message
@@ -145,7 +141,7 @@ function updateTask(req, res) {
     }));
   }
   else {
-    connection.query('UPDATE tasks SET ? WHERE ?', [{task_name: req.body.task_name, is_done: req.body.is_done}, {task_id: req.params.id}], (err, results) => {
+    connection.query('UPDATE tasks SET ? WHERE ?', [{task_name: req.body.task_name, is_done: req.body.is_done, category_id: req.body.category_id}, {task_id: req.params.id}], (err, results) => {
       if (err) {
         res.status(500).send(JSON.stringify({
           error: err.message
@@ -156,8 +152,6 @@ function updateTask(req, res) {
     });
   }
 }
-
-
 
 function deleteTask(req, res) {
   connection.query('DELETE FROM tasks WHERE ?', {task_id: req.params.id}, (err, results) => {
@@ -170,7 +164,6 @@ function deleteTask(req, res) {
     }
   });
 }
-
 
 // Start Server
 const PORT = process.env.PORT || 3000;
