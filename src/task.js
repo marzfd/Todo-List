@@ -14,18 +14,20 @@ export function getTask(req, res) {
 export function createTask(req, res) {
   res.header('Content-Type', 'application/json');
   if (!req.body) invalidRequest(res);
+  const { task_name, is_done, category_id } = req.body;
   connection.query(
     'INSERT INTO tasks SET ? ',
-    {task_name: req.body.task_name, is_done: req.body.is_done, category_id: req.body.category_id},
+    {task_name, is_done, category_id},
     (err, results) => showResults(res, err, results)
   );
 }
 
 export function updateTask(req, res) {
   if (!req.body) invalidRequest(res);
+  const { task_name, is_done, category_id } = req.body;
   connection.query(
     'UPDATE tasks SET ? WHERE ?',
-    [{task_name: req.body.task_name, is_done: req.body.is_done, category_id: req.body.category_id}, {task_id: req.params.id}],
+    [{task_name, is_done, category_id}, {task_id: req.params.id}],
     (err, results) => showResults(res, err, results)
   );
 }
