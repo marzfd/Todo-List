@@ -13,24 +13,26 @@ export function getCategory(req, res) {
 
 export function createCategory(req, res) {
   res.header('Content-Type', 'application/json');
-  if (!req.body.category_name) {
+  const { category_name } = req.body;
+  if (!category_name) {
     invalidRequest(res);
   } else {
     connection.query(
       'INSERT INTO categories SET ?',
-      {category_name: req.body.category_name},
+      {category_name},
       (err, results) => showResults(res, err, results)
     );
   }
 }
 
 export function updateCategory(req, res) {
-  if (!req.body.category_name) {
+  const { category_name } = req.body;
+  if (!category_name) {
     invalidRequest(res);
   } else {
     connection.query(
       'UPDATE categories SET ? WHERE ?',
-      [{category_name: req.body.category_name}, {category_id: req.params.id}],
+      [{category_name}, {category_id: req.params.id}],
       (err, results) => showResults(res, err, results)
     );
   }

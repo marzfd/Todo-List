@@ -12,11 +12,11 @@ export function getTask(req, res) {
 }
 
 export function createTask(req, res) {
+  const { task_name, is_done, category_id, username } = req.body;
   res.header('Content-Type', 'application/json');
-  if (!req.body.task_name || !req.body.category_id) {
+  if (!task_name || !category_id) {
     invalidRequest(res);
   } else {
-    const { task_name, is_done, category_id, username } = req.body;
     connection.query(
       'INSERT INTO tasks SET ? ',
       {task_name, is_done, category_id, username},
@@ -26,10 +26,10 @@ export function createTask(req, res) {
 }
 
 export function updateTask(req, res) {
-  if (!req.body) {
+  const { task_name, is_done, category_id } = req.body;
+  if (!task_name || !category_id) {
     invalidRequest(res);
   } else {
-    const { task_name, is_done, category_id } = req.body;
     connection.query(
       'UPDATE tasks SET ? WHERE ?',
       [{task_name, is_done, category_id}, {task_id: req.params.id}],
