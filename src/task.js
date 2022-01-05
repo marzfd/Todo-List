@@ -14,10 +14,10 @@ export function getTask(req, res) {
 export function createTask(req, res) {
   res.header('Content-Type', 'application/json');
   if (!req.body) invalidRequest(res);
-  const { task_name, is_done, category_id } = req.body;
+  const { task_name, is_done, category_id, username } = req.body;
   connection.query(
     'INSERT INTO tasks SET ? ',
-    {task_name, is_done, category_id},
+    {task_name, is_done, category_id, username},
     (err, results) => showResults(res, err, results)
   );
 }
