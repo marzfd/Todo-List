@@ -2,7 +2,7 @@ import express from "express";
 import path from "path";
 import { getCategory, createCategory, updateCategory, deleteCategory } from "./src/category.js";
 import { getTask, createTask, updateTask, deleteTask } from "./src/task.js";
-import { getUser, createUser, updateUser, deleteUser } from "./src/users.js";
+import { getUser, createUser, updateUser, deleteUser, checkUser } from "./src/users.js";
 
 const app = express();
 app.use(express.json());
@@ -47,6 +47,9 @@ app.put('/users/:username', (req, res) => updateUser(req, res));
 
 // Delete User
 app.delete('/users/:username', (req, res) => deleteUser(req, res));
+
+// Check if user exists
+app.get('/p/:tagId', (req, res) => checkUser(req, res));
 
 // Start Server
 const PORT = process.env.PORT || 3000;

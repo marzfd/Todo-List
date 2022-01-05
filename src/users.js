@@ -51,3 +51,20 @@ export function deleteUser(req, res) {
     (err, results) => showResults(res, err, results)
   );
 }
+
+export function checkUser(req, res) {
+  const username = req.params.tagId;
+  connection.query(
+    'SELECT * FROM users WHERE ?',
+    {username},
+    (err, results) => {
+      if (err) {
+        res.status(500).send({ error: err.message });
+      } else if (results.length === 0) {
+        res.status(200).send({ msg: 'Valid username' });
+      } else {
+        res.status(400).send({ msg: 'Invalid username' });
+      }
+    }
+  );
+}
