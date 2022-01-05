@@ -13,23 +13,29 @@ export function getTask(req, res) {
 
 export function createTask(req, res) {
   res.header('Content-Type', 'application/json');
-  if (!req.body) invalidRequest(res);
-  const { task_name, is_done, category_id, username } = req.body;
-  connection.query(
-    'INSERT INTO tasks SET ? ',
-    {task_name, is_done, category_id, username},
-    (err, results) => showResults(res, err, results)
-  );
+  if (!req.body.task_name || !req.body.category_id) {
+    invalidRequest(res);
+  } else {
+    const { task_name, is_done, category_id, username } = req.body;
+    connection.query(
+      'INSERT INTO tasks SET ? ',
+      {task_name, is_done, category_id, username},
+      (err, results) => showResults(res, err, results)
+    );
+  }
 }
 
 export function updateTask(req, res) {
-  if (!req.body) invalidRequest(res);
-  const { task_name, is_done, category_id } = req.body;
-  connection.query(
-    'UPDATE tasks SET ? WHERE ?',
-    [{task_name, is_done, category_id}, {task_id: req.params.id}],
-    (err, results) => showResults(res, err, results)
-  );
+  if (!req.body) {
+    invalidRequest(res);
+  } else {
+    const { task_name, is_done, category_id } = req.body;
+    connection.query(
+      'UPDATE tasks SET ? WHERE ?',
+      [{task_name, is_done, category_id}, {task_id: req.params.id}],
+      (err, results) => showResults(res, err, results)
+    );
+  }
 }
 
 export function deleteTask(req, res) {
