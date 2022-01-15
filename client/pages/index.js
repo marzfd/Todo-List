@@ -18,15 +18,23 @@ export default function Home() {
           <h1>Manage Your Tasks</h1>
           <p>What should I do today?</p>
           <style jsx>{`
-          p {
-            font-family: 'Open Sans Condensed', sans-serif;
-            font-size: calc(1.5em + 0.5vw);
-            }
-          @media (max-width: 800px) {
             p {
+              font-family: 'Open Sans Condensed', sans-serif;
               font-size: calc(1em + 0.5vw);
+              }
+            @media (max-width: 768px) {
+              p {
+                font-size: calc(0.8em + 0.5vw);
+              }
             }
-          }
+            @media (max-width: 480px) {
+              div {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+              }
+            }
           `}</style>
           <button className={styles.btn} >Let's Start</button>
         </div>

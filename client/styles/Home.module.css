@@ -3,17 +3,17 @@
   display: flex;
   flex-direction: row;
   justify-content: start;
-  padding: 30px 200px;
+  padding: 5% 5% 0 8%;
   font-family: 'Montserrat', sans-serif;
   font-size: calc(10px + 2vmin);
 }
 
 .main img {
-  width: 50%;
+  width: 80%;
 }
 
 .main h1 {
-  font-size: calc(10px + 3vmin);
+  font-size: calc(10px + 2vmin);
 }
 
 .btn {
@@ -31,17 +31,24 @@
 }
 
 .doodleImg {
-  margin-left: 20%;
-  margin-top: 50px;
+  margin-left: 30%;
+  width: 40%;
 }
 
-@media (max-width: 800px) {
-  .main {
-    padding: 50px;
+@media (max-width: 1280px) {
+  .main img {
+    width: 50%;
   }
 
+  .doodleImg {
+    width: 40%;
+    margin: 0 0 0 20%;
+  }
+}
+
+@media (max-width: 768px) {
   .main img {
-    width: 80%;
+    width: 60%;
   }
 
   .main h1 {
@@ -56,26 +63,30 @@
   }
 
   .doodleImg {
-    width: 70%;
+    width: 60%;
     margin-left: 50px;
   }
 }
 
 @media (max-width: 480px) {
   .main {
-    padding: 20px;
+    padding: 0;
     flex-direction: column;
     justify-content: center;
     align-items: center;
   }
 
   .main img {
-    width: 50%;
+    width: 40%;
   }
 
   .doodleImg {
     margin-top: 10px;
     margin-left: 0;
-    width: 80%;
+    width: 60%;
+  }
+
+  .btn {
+    width: 40%;
   }
 }
