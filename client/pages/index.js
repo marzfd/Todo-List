@@ -17,25 +17,27 @@ export default function Home() {
           <img src="/logo.svg" alt="Logo" />
           <h1>Manage Your Tasks</h1>
           <p>What should I do today?</p>
-          <style jsx>{`
-            p {
-              font-family: 'Open Sans Condensed', sans-serif;
-              font-size: calc(1em + 0.5vw);
-              }
-            @media (max-width: 768px) {
+          <style jsx>
+            {`
               p {
-                font-size: calc(0.8em + 0.5vw);
+                font-family: 'Open Sans Condensed', sans-serif;
+                font-size: calc(1em + 0.5vw);
+                }
+              @media (max-width: 768px) {
+                p {
+                  font-size: calc(0.8em + 0.5vw);
+                }
               }
-            }
-            @media (max-width: 480px) {
-              div {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
+              @media (max-width: 480px) {
+                div {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  justify-content: center;
+                }
               }
-            }
-          `}</style>
+            `}
+          </style>
           <button className={styles.btn} >Let's Start</button>
         </div>
         <div className={styles.doodleImg}>
