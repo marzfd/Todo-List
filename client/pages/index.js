@@ -1,54 +1,32 @@
 import Head from 'next/head'
+import Link from 'next/link'
 import Image from 'next/image'
 import Nav from '../components/Nav'
-import styles from '../styles/Home.module.css'
 
 export default function Home() {
   return (
-    <div className={styles.container}>
+    <div className=''>
       <Nav />
       <Head>
         <title>TODO List App</title>
         <meta name="description" content="Web development project" />
-        <link rel="icon" href="/logo.svg" />
+        <link rel="icon" href="/logo.png" />
       </Head>
-      <main className={styles.main}>
-        <div>
-          <img src="/logo.svg" alt="Logo" />
-          <h1>Manage Your Tasks</h1>
-          <p>What should I do today?</p>
-          <style jsx>
-            {`
-              p {
-                font-family: 'Open Sans Condensed', sans-serif;
-                font-size: calc(1em + 0.5vw);
-                }
-              @media (max-width: 768px) {
-                p {
-                  font-size: calc(0.8em + 0.5vw);
-                }
-              }
-              @media (max-width: 480px) {
-                div {
-                  display: flex;
-                  flex-direction: column;
-                  align-items: center;
-                  justify-content: center;
-                }
-              }
-            `}
-          </style>
-          <button className={styles.btn} >Let's Start</button>
+      <main className='mx-auto lg:w-9/12 p-10 flex flex-wrap'>
+        <div className='mb-3'>
+          <div className='lg:mb-6 mb-3 mt-10'>
+            <Image src="/logo.png" alt="Logo" width={270} height={200} />
+          </div>
+          <h1 className='lg:text-5xl md:text-3xl font-montserrat font-semibold'>Manage Your Tasks</h1>
+          <p className='lg:text-3xl md:text-xl font-open-sans lg:pt-10 lg:pb-10 pt-5 pb-5'>What should I do today?</p>
+          <Link href='/signIn'>
+            <a className='bg-purple-700 text-white md:font-semibold font-caveat lg:text-xl py-2 px-4 rounded-lg shadow-lg shadow-purple-500/50 focus:outline-none'>Let's Start</a>
+          </Link>
         </div>
-        <div className={styles.doodleImg}>
-          <Image src="/firstPage.png" alt="Doodles Stuff To DO" width={500} height={500} />
+        <div className='mx-auto max-w-sm self-center'>
+          <Image src='/doodle.png' alt='doodle' width={400} height={350} />
         </div>
       </main>
-
-      <footer>
-        <Image src="/logo.svg" alt="Logo" width={50} height={25} />
-        &copy; 2022 Created by Marzieh !
-      </footer>
     </div>
   )
 }
