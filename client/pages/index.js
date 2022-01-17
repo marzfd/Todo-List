@@ -5,7 +5,7 @@ import Nav from '../components/Nav'
 
 export default function Home() {
   return (
-    <div className=''>
+    <>
       <Nav />
       <Head>
         <title>TODO List App</title>
@@ -27,6 +27,6 @@ export default function Home() {
           <Image src='/doodle.png' alt='doodle' width={400} height={350} />
         </div>
       </main>
-    </div>
+    </>
   )
 }
