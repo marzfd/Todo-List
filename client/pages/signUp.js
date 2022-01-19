@@ -14,7 +14,7 @@ const signUp = () => {
           <div className='md:mt-14 lg:mt-20 hidden md:block'>
             <p className='text-lg lg:mb-5 mt-2 mb-3'>Have an account already?</p>
             <Link href='/signIn'>
-              <a className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white font-caveat lg:text-xl py-2 px-4 rounded-lg shadow-lg shadow-purple-500/50 focus:outline-none'>Sign In</a>
+              <button type='button' className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white font-caveat lg:text-xl py-2 px-4 rounded-lg shadow-lg shadow-purple-500/50 focus:outline-none'>Sign In</button>
             </Link>
           </div>
         </div>
@@ -50,7 +50,7 @@ const signUp = () => {
         <div className='mt-20 md:hidden'>
             <p className='text-lg mt-2 mb-3'>Have an account already?</p>
             <Link href='/signIn'>
-              <button type="submit" className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white font-caveat lg:text-xl py-2 px-4 rounded-lg shadow-lg shadow-purple-500/50 focus:outline-none'>Sign In</button>
+              <button type="button" className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white font-caveat lg:text-xl py-2 px-4 rounded-lg shadow-lg shadow-purple-500/50 focus:outline-none'>Sign In</button>
             </Link>
           </div>
       </main>
