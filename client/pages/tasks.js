@@ -10,7 +10,9 @@ const tasks = ({ todos }) => {
             <Image src="/logo.png" alt="Logo" width={135} height={100} />
           </div>
           <p className='lg:text-3xl md:text-xl lg:pt-10 lg:pb-10 mt-2 mb-5'>Marzieh, you have 5 tasks today !</p>
+          <div className='hidden sm:block'>
           <Image src="/tasks.png" alt="tasks-doodle" width={250} height={180} />
+          </div>
         </div>
         <div className='mx-auto p-4 md:p-8 md:w-1/2 lg:w-1/2 w-full self-center'>
           <h2 className='mb-10 font-bold text-center'>TODO</h2>
