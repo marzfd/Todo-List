@@ -2,7 +2,7 @@ import Image from "next/image"
 
 const Layout = ({ children }) => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen font-montserrat">
       <main className="flex-auto bg-gradient-to-br from-orange-50 to-orange-300">
         {children}
       </main>
