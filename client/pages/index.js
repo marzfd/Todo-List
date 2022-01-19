@@ -20,7 +20,7 @@ export default function Home() {
           <h1 className='lg:text-5xl md:text-3xl font-semibold'>Manage Your Tasks</h1>
           <p className='lg:text-3xl md:text-xl font-open-sans lg:pt-10 lg:pb-10 pt-5 pb-5'>What should I do today?</p>
           <Link href='/signIn'>
-            <a className='bg-purple-700 text-white md:font-semibold font-caveat lg:text-xl py-2 px-4 rounded-lg shadow-lg shadow-purple-500/50 focus:outline-none'>Let's Start</a>
+            <a className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white md:font-semibold font-caveat lg:text-xl py-2 px-4 rounded-lg shadow-lg shadow-purple-500/50 focus:outline-none'>Let's Start</a>
           </Link>
         </div>
         <div className='mx-auto max-w-sm self-center'>

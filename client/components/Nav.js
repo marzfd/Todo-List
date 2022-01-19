@@ -24,7 +24,7 @@ const Nav = () => {
             </li>
             <li>
               <Link href="/signUp" >
-                <a className="block px-4 py-2 text-white bg-purple-700 rounded focus:ring-2 focus:ring-gray-600 focus:outline-none" aria-current="page">Sign Up</a>
+                <a className="block px-4 py-2 text-white bg-purple-700 rounded focus:ring-2 focus:ring-gray-600 focus:outline-none hover:bg-purple-500 transition duration-300" aria-current="page">Sign Up</a>
               </Link>
             </li>
           </ul>
