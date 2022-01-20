@@ -36,7 +36,11 @@ const profile = () => {
           </ul>
           <ul className="md:my-16 space-y-3">
             <li className="pt-10 md:py-10">
-              <button type='button' className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white w-full py-2 px-2 rounded focus:outline-none text-sm md:text-base'>Sign Out</button>
+              <Link href='/signIn'>
+                <a>
+                  <button type='button' className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white w-full py-2 px-2 rounded focus:outline-none text-sm md:text-base'>Sign Out</button>
+                </a>
+              </Link>
             </li>
             <li>
               <button type='button' className='text-sm bg-green-600 hover:bg-green-500 transition duration-300 text-white w-full py-2 px-3 rounded focus:outline-none'>Edit your account</button>
