@@ -14,7 +14,9 @@ const signUp = () => {
           <div className='md:mt-14 lg:mt-20 hidden md:block'>
             <p className='text-lg lg:mb-5 mt-2 mb-3'>Have an account already?</p>
             <Link href='/signIn'>
-              <button type='button' className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white font-caveat lg:text-xl py-2 px-4 rounded-lg shadow-lg shadow-purple-500/50 focus:outline-none'>Sign In</button>
+              <a>
+                <button type='button' className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white font-caveat lg:text-xl py-2 px-4 rounded-lg shadow-lg shadow-purple-500/50 focus:outline-none'>Sign In</button>
+              </a>
             </Link>
           </div>
         </div>
@@ -37,12 +39,14 @@ const signUp = () => {
               <input type='password' placeholder="Confirm Password" disabled className='text-sm border-b-2 border-purple-200 placeholder-purple-300 px-3 py-2 focus:outline-none focus:border-purple-400 w-full'/>
             </div>
             <div className="flex items-center text-gray-500">
-              <input type='checkbox' id='agree' className='mr-2 mt-3 mb-3' required />
-              <label for='agree' className='text-xs'>I agree to terms and privacy.</label>
+              <input type='checkbox' className='mr-2 mt-3 mb-3' required />
+              <label className='text-xs'>I agree to terms and privacy.</label>
             </div>
             <div>
               <Link href='/profile'>
-                <button type="submit" className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white w-full py-2 px-4 rounded-lg focus:outline-none'>Sign Up</button>
+                <a>
+                  <button type="submit" className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white w-full py-2 px-4 rounded-lg focus:outline-none'>Sign Up</button>
+                </a>
               </Link>
             </div>
           </form>
@@ -50,7 +54,9 @@ const signUp = () => {
         <div className='mt-20 md:hidden'>
             <p className='text-lg mt-2 mb-3'>Have an account already?</p>
             <Link href='/signIn'>
-              <button type="button" className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white font-caveat lg:text-xl py-2 px-4 rounded-lg shadow-lg shadow-purple-500/50 focus:outline-none'>Sign In</button>
+              <a>
+                <button type="button" className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white font-caveat lg:text-xl py-2 px-4 rounded-lg shadow-lg shadow-purple-500/50 focus:outline-none'>Sign In</button>
+              </a>
             </Link>
           </div>
       </main>

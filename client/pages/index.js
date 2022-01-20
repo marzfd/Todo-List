@@ -20,7 +20,9 @@ export default function Home() {
           <h1 className='lg:text-5xl md:text-3xl font-semibold'>Manage Your Tasks</h1>
           <p className='lg:text-3xl md:text-xl font-open-sans lg:pt-10 lg:pb-10 pt-5 pb-5'>What should I do today?</p>
           <Link href='/signIn'>
-            <button type='button' className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white md:font-semibold font-caveat lg:text-xl py-2 px-4 rounded-lg shadow-lg shadow-purple-500/50 focus:outline-none'>Let's Start</button>
+            <a>
+              <button type='button' className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white md:font-semibold font-caveat lg:text-xl py-2 px-4 rounded-lg shadow-lg shadow-purple-500/50 focus:outline-none'>Let&apos;s Start</button>
+            </a>
           </Link>
         </div>
         <div className='mx-auto max-w-sm self-center'>

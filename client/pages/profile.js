@@ -14,7 +14,9 @@ const profile = () => {
             <p className='lg:text-3xl md:text-xl'>Hi Marzieh !</p>
             <div>
               <Link href='/tasks'>
-                <button type="button" className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white w-full md:py-3 py-1 md:px-2 rounded-lg shadow-lg font-caveat text-xl md:text-2xl md:font-bold focus:outline-none'>Your Tasks</button>
+                <a>
+                  <button type="button" className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white w-full md:py-3 py-1 md:px-2 rounded-lg shadow-lg font-caveat text-xl md:text-2xl md:font-bold focus:outline-none'>Your Tasks</button>
+                </a>
               </Link>
             </div>
           </div>

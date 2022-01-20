@@ -12,9 +12,11 @@ const signIn = () => {
           <h2 className='lg:text-5xl md:text-3xl font-semibold'>Welcome Back !</h2>
           <p className='lg:text-3xl md:text-xl lg:pt-10 lg:pb-10 mt-2 mb-5'>Good Morning</p>
           <div className='md:mt-14 lg:mt-20 hidden md:block'>
-            <p className='text-lg lg:mb-5 mt-2 mb-3'>Don't have an account?</p>
+            <p className='text-lg lg:mb-5 mt-2 mb-3'>Don&apos;t have an account?</p>
             <Link href='/signUp'>
-              <button type='button' className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white font-caveat lg:text-xl py-2 px-4 rounded-lg shadow-lg shadow-purple-500/50 focus:outline-none'>Sign Up</button>
+              <a>
+                <button type='button' className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white font-caveat lg:text-xl py-2 px-4 rounded-lg shadow-lg shadow-purple-500/50 focus:outline-none'>Sign Up</button>
+              </a>
             </Link>
           </div>
         </div>
@@ -33,15 +35,19 @@ const signIn = () => {
             </div>
             <div>
               <Link href='/profile'>
-                <button type="submit" className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white w-full py-2 px-4 rounded-lg focus:outline-none'>Sign In</button>
+                <a>
+                  <button type="submit" className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white w-full py-2 px-4 rounded-lg focus:outline-none'>Sign In</button>
+                </a>
               </Link>
             </div>
           </form>
         </div>
         <div className='mt-20 md:hidden'>
-            <p className='text-lg mt-2 mb-3'>Don't have an account?</p>
+            <p className='text-lg mt-2 mb-3'>Don&apos;t have an account?</p>
             <Link href='/signUp'>
-              <button type="button" className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white font-caveat lg:text-xl py-2 px-4 rounded-lg shadow-lg shadow-purple-500/50 focus:outline-none hover:bg-purple-100'>Sign Up</button>
+              <a>
+                <button type="button" className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white font-caveat lg:text-xl py-2 px-4 rounded-lg shadow-lg shadow-purple-500/50 focus:outline-none hover:bg-purple-100'>Sign Up</button>
+              </a>
             </Link>
           </div>
       </main>
