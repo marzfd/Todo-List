@@ -46,7 +46,7 @@ const signIn = () => {
             <p className='text-lg mt-2 mb-3'>Don&apos;t have an account?</p>
             <Link href='/signUp'>
               <a>
-                <button type="button" className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white font-caveat lg:text-xl py-2 px-4 rounded-lg shadow-lg shadow-purple-500/50 focus:outline-none hover:bg-purple-100'>Sign Up</button>
+                <button type="button" className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white font-caveat lg:text-xl py-2 px-4 rounded-lg shadow-lg shadow-purple-500/50 focus:outline-none'>Sign Up</button>
               </a>
             </Link>
           </div>
