@@ -4,7 +4,7 @@ import Image from "next/image"
 const profile = () => {
   return (
     <>
-      <main className='mx-auto p-5 md:p-10 flex flex-wrap grid md:grid-cols-3'>
+      <main className='mx-auto p-5 md:p-10 flex flex-wrap md:grid-cols-3'>
         <div className="mx-auto">
           <div className='lg:mb-6 mb-3 md:mt-10 sm:mt-1 text-center'>
             <Image src="/logo.png" alt="Logo" width={135} height={100} />
