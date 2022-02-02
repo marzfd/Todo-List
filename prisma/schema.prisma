@@ -12,7 +12,7 @@ datasource db {
 
 model User {
   name          String
-  username      String   @unique
+  username      String   @id @unique
   email         String
   password      String
   registered_at DateTime @default(now())
