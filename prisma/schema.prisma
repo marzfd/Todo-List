@@ -15,6 +15,7 @@ model User {
   username      String   @id @unique
   email         String
   password      String
+  profile_photo String
   registered_at DateTime @default(now())
   Task          Task[]
 }
