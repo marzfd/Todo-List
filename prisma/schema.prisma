@@ -15,25 +15,25 @@ model User {
   username      String   @id @unique
   email         String
   password      String
-  profile_photo String
+  profile_pic   String
   registered_at DateTime @default(now())
-  Task          Task[]
+  tasks         Task[]
 }
 
 model Category {
   category_id   Int    @id @default(autoincrement())
   category_name String
-  Task          Task[]
+  tasks         Task[]
 }
 
 model Task {
-  task_id             Int      @id @default(autoincrement())
-  task_name           String
-  username            String
-  category_id         Int
-  is_done             Boolean  @default(false)
-  created_at          DateTime @default(now())
-  updated_at          DateTime @updatedAt
-  userUsername        User     @relation(fields: [username], references: [username])
-  categoryCategory_id Category @relation(fields: [category_id], references: [category_id])
+  task_id     Int      @id @default(autoincrement())
+  task_name   String
+  username    String
+  category_id Int
+  is_done     Boolean  @default(false)
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  users       User     @relation(fields: [username], references: [username])
+  categoreis  Category @relation(fields: [category_id], references: [category_id])
 }
