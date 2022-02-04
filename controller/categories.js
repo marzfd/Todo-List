@@ -1,42 +1,63 @@
-import dbQuery from '/config/db';
-import { showResults, invalidRequest } from '/controller/helpers';
+import prisma from "../db/prisma";
 
-export const getCategory = async (req, res) => {
-  const category = await dbQuery('SELECT * FROM categories');
-  showResults(res, category);
-}
-
-export const createCategory = async (req, res) => {
-  const { category_name } = req.body;
-  const category = await dbQuery(
-    'INSERT INTO categories SET ?',
-    {category_name}
-  );
-  if (!category_name) {
-    invalidRequest(res);
-  } else {
-    showResults(res, category);
+export const getCategory = async () => {
+  try {
+    const category = await prisma.category.findMany();
+    return category
+  }
+  catch (err) {
+    return { error: `Something Went Wrong ! : ${err.message}` }
   }
 }
 
-export const updateCategory = async (req, res) => {
-  const { category_name } = req.body;
-  if (!category_name) {
-    invalidRequest(res);
-  } else {
-    const category = await dbQuery(
-      'UPDATE categories SET ? WHERE ?',
-      [{category_name}, {category_id: req.params.id}]
-    );
-    showResults(res, category);
+export const getCategoryById = async ( category_id ) => {
+  try {
+    const category = await prisma.category.findOne({
+      where: { category_id }
+    })
+    return category
+  }
+  catch (err) {
+    return { error: `Something Went Wrong ! : ${err.message}` }
   }
 }
 
-export const deleteCategory = async (req, res) => {
-  const category = await dbQuery(
-    'DELETE FROM categories WHERE ?',
-    {category_id: req.params.id}
-  );
-  showResults(res, category);
+export const createCategory = async ( category_name ) => {
+  try {
+    const category = await prisma.category.create({
+      data: {
+        category_name
+      }
+    })
+    return { category, message: "Category Created Successfully !" }
+  }
+  catch (err) {
+    return { error: `Unable to Create ! : ${err.message}` }
+  }
+}
+
+export const updateCategory = async ( category_id, updatedData ) => {
+  try {
+    const category = await prisma.category.update({
+      where: { category_id },
+      data: { ...updatedData }
+    })
+    return { category, message: "Category Updated Successfully !" }
+  }
+  catch (err) {
+    return { error: `Unable to Update ! : ${err.message}` }
+  }
+}
+
+export const deleteCategory = async ( category_id ) => {
+  try {
+    const category = await prisma.category.delete({
+      where: { category_id }
+    })
+    return { category, message: "Category Deleted Successfully !" }
+  }
+  catch (err) {
+    return { error: `Unable to Delete ! : ${err.message}` }
+  }
 }
 

@@ -1,41 +1,65 @@
-import dbQuery from '/config/db';
-import { showResults, invalidRequest } from '/controller/helpers';
+import prisma from "../db/prisma";
 
-export const getTask = async (req, res) => {
-  const task = await dbQuery('SELECT * FROM tasks');
-  showResults(res, task);
-}
-
-export const createTask = async (req, res) => {
-  const { task_name, is_done, category_id, username } = req.body;
-  await dbQuery(
-    'INSERT INTO tasks SET ?',
-    { task_name, is_done, category_id, username }
-  );
-  if (!task_name || !category_id) {
-    invalidRequest(res);
-  } else {
-    showResults(res, task);
+export const getTask = async () => {
+  try {
+    const tasks = await prisma.task.findMany()
+    return tasks
+  }
+  catch (err) {
+    return { error: `Something Went Wrong ! : ${err.message}` }
   }
 }
 
-export const updateTask = async (req, res) => {
-  const { task_name, is_done, category_id } = req.body;
-  if (!task_name || !category_id) {
-    invalidRequest(res);
-  } else {
-    const task = await dbQuery(
-      'UPDATE tasks SET ? WHERE ?',
-      [{ task_name, is_done, category_id }, { task_id: req.params.id }]
-    );
-      showResults(res, task);
+export const getTaskById = async ( id ) => {
+  try {
+    const task = await prisma.task.findOne({
+      where: { id }
+    })
+    return task
+  }
+  catch (err) {
+    return { error: `Something Went Wrong ! : ${err.message}` }
   }
 }
 
-export const deleteTask = async (req, res) => {
-  const task = await dbQuery(
-    'DELETE FROM tasks WHERE ?',
-    { task_id: req.params.id }
-  );
-  showResults(res, task);
+export const createTask = async ( task_name, username, category_id, is_done) => {
+  try {
+    const task = await prisma.task.create({
+      data: {
+        task_name,
+        username,
+        category_id,
+        is_done
+      }
+    })
+    return { task, message: "Task Created Successfully !" }
+  }
+  catch (err) {
+    return { error: `Unable to Create ! : ${err.message}` }
+  }
+}
+
+export const updateTask = async ( task_id, updatedData ) => {
+  try {
+    const task = await prisma.task.update({
+      where: { task_id },
+      data: { ...updatedData }
+    })
+    return { task, message: "Task Updated Successfully !" }
+  }
+  catch (err) {
+    return { error: `Unable to Update ! : ${err.message}` }
+  }
+}
+
+export const deleteTask = async ( task_id ) => {
+  try {
+    const task = await prisma.task.delete({
+      where: { task_id }
+    })
+    return { task, message: "Task Deleted Successfully !" }
+  }
+  catch (err) {
+    return { error: `Unable to Delete ! : ${err.message}` }
+  }
 }
