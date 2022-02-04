@@ -1,19 +1,11 @@
 import Image from "next/image";
 import NewTask from "../components/Modal/NewTask";
 import UpdateTask from "../components/Modal/UpdateTask";
-import prisma from "../db/prisma";
 
 export async function getServerSideProps() {
-  try {
-    const data = await prisma.task.findMany();
-    const tasks = JSON.parse(JSON.stringify(data));
-    console.log(tasks);
-    return {
-      props: { tasks },
-    };
-  } catch (err) {
-    console.log(err);
-  }
+  const res = await fetch('http://localhost:3000/api/tasks');
+  const tasks = await res.json();
+  return { props: { tasks } }
 }
 
 const tasks = ({ tasks }) => {
@@ -35,7 +27,7 @@ const tasks = ({ tasks }) => {
             {tasks.map((task, index) => (
                <li
                key={index}
-               className={task.is_done === true ? "bg-white p-3 rounded-lg shadow-2xl group flex items-center justify-between border-l-8 border-green-400" : "bg-white p-3 border-l-8 border-red-400 rounded-lg shadow-2xl group flex items-center justify-between"}
+               className={`bg-white p-3 rounded-lg shadow-2xl group flex items-center justify-between border-l-8 ${ task.is_done === true ? 'border-green-400' : 'border-red-400'}`}
              >
                <p>{task.task_name}</p>
                <div>
