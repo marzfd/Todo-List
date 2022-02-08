@@ -27,33 +27,32 @@ const tasks = ({ tasks }) => {
         <div className='mx-auto p-4 md:p-8 md:w-1/2 lg:w-1/2 w-full self-center'>
           <h2 className='mb-10 font-bold text-center'>TODO</h2>
           <ul className='space-y-3'>
-          <li
-            className='bg-white p-3 rounded-lg shadow-2xl group flex items-center'>
-              <div className='pl-5'>
-                <p className='text-lg font-bold'>Category</p>
-              </div>
-              <div className='pl-20'>
-                <p className='text-lg font-bold'>Task</p>
-              </div>
+            <li className='bg-white justify-between p-3 rounded-lg shadow-2xl group flex items-center'>
+              <p className='text-lg font-bold'>Category</p>
+              <p className='text-lg font-bold'>Task</p>
+              <Link href='/categories'>
+                <a>
+                  <button className='opacity-0 group-hover:opacity-100 bg-purple-700 hover:bg-purple-500 transition duration-300 text-white lg:text-sm py-2 px-4 rounded-lg shadow-lg shadow-purple-500/50 focus:outline-none'>All Categories</button>
+                </a>
+              </Link>
             </li>
             {tasks.map((task, index) => (
-              <li
-                key={index}
-                className={`bg-white p-3 rounded-lg shadow-2xl group flex items-center border-l-8 ${ task.is_done === true ? 'border-green-400' : 'border-red-400'}`}
-              >
-                <Link href={`/tasks/${task.task_id}`}>
-                  <a className="flex">
-                    <p className="">{task.category_id}</p>
-                    <p className="">{task.task_name}</p>
+              <Link href={`/tasks/${task.task_id}`} key={index}>
+                <a>
+                  <li
+                    className={`bg-white p-3 my-3 rounded-lg shadow-2xl group flex items-center justify-between border-l-8 ${ task.is_done === true ? 'border-green-400' : 'border-red-400'}`}
+                  >
+                    <p>{task.category_id}</p>
+                    <p>{task.task_name}</p>
                     <div>
                       <UpdateTask task={task} />
                       <button type="button" className='opacity-0 group-hover:opacity-100 transition duration-300 text-white mx-1 focus:outline-none'>
                         <svg className="h-6 w-6 text-red-500"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  strokeWidth="2"  strokeLinecap="round"  strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <line x1="15" y1="9" x2="9" y2="15" />  <line x1="9" y1="9" x2="15" y2="15" /></svg>
                       </button>
                     </div>
-                  </a>
-                </Link>
-              </li>
+                  </li>
+                </a>
+              </Link>
             ))}
           </ul>
           <NewTask />
