@@ -13,11 +13,13 @@ export const getServerSideProps = async (ctx) => {
 
 const Category = ({ category }) => {
   return (
-    <div>
-      <h1>Category: {category.category_name}</h1>
-      <h4>Category ID: {category.category_id}</h4>
+    <div className="space-y-3">
+      <h1>Category: <strong>{category.category_name}</strong></h1>
+      <h4>Category ID: <strong>{category.category_id}</strong></h4>
       <Link href="/categories">
-        <a>Go Back</a>
+        <a>
+          <button className="bg-purple-700 text-white font-semibold rounded p-2 m-3">Go Back</button>
+        </a>
       </Link>
     </div>
   );

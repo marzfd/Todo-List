@@ -13,18 +13,19 @@ export const getServerSideProps = async (ctx) => {
       task_name: true,
     }
   });
-  console.log(task);
   return { props: { task } };
 };
 
 const Task = ({ task }) => {
   return (
-    <div>
-      <h1>Task: {task.task_name}</h1>
-      <h4>Category ID: {task.category_id}</h4>
-      <p>Task ID: {task.task_id}</p>
+    <div className="space-y-3">
+      <h1>Task: <strong>{task.task_name}</strong></h1>
+      <h4>Category ID: <strong>{task.category_id}</strong></h4>
+      <p>Task ID: <strong>{task.task_id}</strong></p>
       <Link href="/tasks">
-        <a>Go Back</a>
+        <a>
+          <button className="bg-purple-700 text-white font-semibold rounded p-2 m-3">Go Back</button>
+        </a>
       </Link>
     </div>
   );

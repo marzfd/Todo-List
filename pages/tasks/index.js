@@ -20,8 +20,8 @@ const tasks = ({ tasks }) => {
             <Image src="/logo.png" alt="Logo" width={135} height={100} />
           </div>
           <p className='lg:text-3xl md:text-xl lg:pt-10 lg:pb-10 mt-2 mb-5'>Marzieh, you have <strong>{tasks.length}</strong> tasks today !</p>
-          <div className='hidden sm:block'>
-          <Image src="/tasks.png" alt="tasks-doodle" width={250} height={180} />
+          <div className='self-center'>
+            <Image src="/tasks.png" alt="tasks-doodle" width={250} height={180} />
           </div>
         </div>
         <div className='mx-auto p-4 md:p-8 md:w-1/2 lg:w-1/2 w-full self-center'>
@@ -32,7 +32,9 @@ const tasks = ({ tasks }) => {
               <p className='text-lg font-bold'>Task</p>
               <Link href='/categories'>
                 <a>
-                  <button className='opacity-0 group-hover:opacity-100 bg-purple-700 hover:bg-purple-500 transition duration-300 text-white lg:text-sm py-2 px-4 rounded-lg shadow-lg shadow-purple-500/50 focus:outline-none'>All Categories</button>
+                  <button className='opacity-0 group-hover:opacity-100 bg-orange-500 hover:bg-orange-400 transition duration-300 text-white lg:text-sm py-2 px-4 rounded-lg shadow-lg shadow-orange-400/50 focus:outline-none'>
+                    All Categories
+                  </button>
                 </a>
               </Link>
             </li>
