@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
+import { useRouter } from "next/router"
 
 const signUp = () => {
 
@@ -12,6 +13,8 @@ const signUp = () => {
   const [agree, setAgree] = useState(false)
   const [error, setError] = useState("")
 
+  const router = useRouter()
+
  const formValid = () => {
    if (!name || !email || !username ) {
       setError("Please fill in all fields")
@@ -22,7 +25,7 @@ const signUp = () => {
     } else if (username.length < 3) {
       setError("Username must be at least 3 characters long")
       return false
-    } else if (!email.includes("@")) {
+    } else if (!email.includes("@" && ".")) {
       setError("Please enter a valid email address")
       return false
     } else {
@@ -30,11 +33,28 @@ const signUp = () => {
     }
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = e => {
     e.preventDefault()
     if (formValid()) {
       setError("")
-      // console.log("Form submitted")
+      fetch('/api/users', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name,
+          email,
+          username
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) {
+          setError('Username already exists !')
+        } else {
+          router.push('/signIn')
+        }
+      })
+      .catch(err => console.log(err))
     }
   }
 
@@ -63,7 +83,7 @@ const signUp = () => {
               <input
                 type='text'
                 placeholder="Name"
-                onChange={(e) => setName(e.target.value)}
+                onChange={e => setName(e.target.value)}
                 className='text-sm border-b-2 border-purple-200 placeholder-purple-300 px-3 py-2 focus:outline-none focus:border-purple-400 w-full'
               />
             </div>
@@ -71,7 +91,7 @@ const signUp = () => {
               <input
                 type='email'
                 placeholder="Email"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={e => setEmail(e.target.value)}
                 className='text-sm border-b-2 border-purple-200 placeholder-purple-300 px-3 py-2 focus:outline-none focus:border-purple-400 w-full'
               />
             </div>
@@ -79,7 +99,7 @@ const signUp = () => {
               <input
                 type='text'
                 placeholder="Username"
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={e => setUsername(e.target.value)}
                 className='text-sm border-b-2 border-purple-200 placeholder-purple-300 px-3 py-2 focus:outline-none focus:border-purple-400 w-full'
               />
             </div>
@@ -92,7 +112,7 @@ const signUp = () => {
             <div className="flex items-center text-gray-500">
               <input
                 type='checkbox'
-                onChange={(e) => setAgree(e.target.checked)}
+                onChange={e => setAgree(e.target.checked)}
                 className='mr-2 mt-3 mb-3'
                 required
               />
