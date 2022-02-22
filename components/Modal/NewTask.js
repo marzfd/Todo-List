@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 
-const NewTask = ({ categories }) => {
+const NewTask = ({ categories, username }) => {
   const [modal, setModal] = useState(false);
   const [task, setTask] = useState('');
   const [categoryId, setCategoryId] = useState('');
@@ -15,18 +15,13 @@ const NewTask = ({ categories }) => {
     if (!task && !categoryId) {
       setError('Please enter all fields !')
     } else {
-
-      console.log(categories);
-      console.log(categoryId);
-      console.log(task);
-
       fetch('/api/tasks', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           task_name: task,
           category_id: parseInt(categoryId),
-          username: 'marzi',
+          username: username
         })
       })
       .then(res => res.json())
@@ -40,7 +35,11 @@ const NewTask = ({ categories }) => {
 
   return (
     <>
-      <button type='button' className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white w-full mt-5 py-2 px-4 rounded-lg focus:outline-none' onClick={toggle}>
+      <button
+        type='button'
+        onClick={toggle}
+        className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white w-full mt-5 py-2 px-4 rounded-lg focus:outline-none'
+      >
         Add New Task
       </button>
       {modal && (
