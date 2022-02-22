@@ -3,18 +3,30 @@ import { useState } from 'react';
 
 const NewTask = () => {
   const [modal, setModal] = useState(false);
-  const [newTask, setNewTask] = useState('');
   const [category, setCategory] = useState('');
 
   const toggle = () => setModal(!modal);
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    // console.log(newTask, category);
-    // create({ newTask, category });
-    setNewTask('');
-    setCategory('');
-    setModal(false);
+  const onSubmit = e => {
+    e.preventDefault()
+    console.log(category);
+    if (!category) {
+      setError('Please enter a category name !')
+    } else {
+      fetch('/api/categories', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          category_name: category
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        alert(data.message)
+        console.log(data)
+      })
+      .catch(err => console.log(err))
+    }
   }
 
   return (
@@ -38,7 +50,7 @@ const NewTask = () => {
               <div className='mt-6'>
                 <button
                   type='submit'
-                  onClick={handleSubmit}
+                  onClick={onSubmit}
                   className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white w-full py-2 px-4 rounded-lg focus:outline-none'
                 >
                   Add Category
