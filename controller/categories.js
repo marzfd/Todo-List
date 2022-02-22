@@ -22,11 +22,12 @@ export const getCategoryById = async ( category_id ) => {
   }
 }
 
-export const createCategory = async ( category_name ) => {
+export const createCategory = async ( category_name, username ) => {
   try {
     const category = await prisma.category.create({
       data: {
-        category_name
+        category_name,
+        username
       }
     })
     return { category, message: "Category Created Successfully !" }

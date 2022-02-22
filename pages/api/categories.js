@@ -19,8 +19,8 @@ export default async (req, res) => {
 
       case "POST": {
         // Create a new category
-        const { category_name } = req.body;
-        const category = await createCategory(category_name);
+        const { category_name, username } = req.body;
+        const category = await createCategory(category_name, username);
         return res.status(200).json(category);
       }
 
