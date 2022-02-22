@@ -12,18 +12,21 @@ datasource db {
 
 model User {
   name          String
-  username      String   @id @unique
+  username      String     @id @unique
   email         String
   password      String?
   profile_pic   String?
-  registered_at DateTime @default(now())
+  registered_at DateTime   @default(now())
   tasks         Task[]
+  Category      Category[]
 }
 
 model Category {
   category_id   Int    @id @default(autoincrement())
   category_name String
+  username      String
   tasks         Task[]
+  users         User   @relation(fields: [username], references: [username])
 }
 
 model Task {
