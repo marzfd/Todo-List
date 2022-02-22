@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import NewTask from "../../components/Modal/NewTask";
 import UpdateTask from "../../components/Modal/UpdateTask";
+import { useRouter } from "next/router";
 
 export async function getServerSideProps() {
   const res1 = await fetch('http://localhost:3000/api/tasks');
@@ -12,6 +13,17 @@ export async function getServerSideProps() {
 }
 
 const tasks = ({ tasks, categories }) => {
+
+  const router = useRouter()
+
+  const {
+    query: { name, username }
+  } = router
+
+  const user = { name, username }
+
+  const userTasks = tasks.filter(task => task.username === username)
+
   return (
     <>
       <main className='mx-auto lg:w-9/12 p-5 md:p-10 flex flex-wrap'>
@@ -19,9 +31,20 @@ const tasks = ({ tasks, categories }) => {
           <div className='lg:mb-6 mb-3 md:mt-10 sm:mt-1'>
             <Image src="/logo.png" alt="Logo" width={135} height={100} />
           </div>
-          <p className='lg:text-3xl md:text-xl lg:pt-10 lg:pb-10 mt-2 mb-5'>Marzieh, you have <strong>{tasks.length}</strong> tasks today !</p>
+          <p className='lg:text-3xl md:text-xl lg:pt-10 lg:pb-10 mt-2 mb-5'>
+            {user.name}, you have <strong>{userTasks.length}</strong> task{userTasks.length > 1 ? 's' : ''} today !
+          </p>
           <div className='self-center'>
             <Image src="/tasks.png" alt="tasks-doodle" width={250} height={180} />
+          </div>
+        </div>
+        <div className='mb-3'>
+          <div className='lg:mb-6 mb-3 md:mt-10 sm:mt-1'>
+            <Link href='/signIn'>
+              <a>
+                <button className='text-center lg:text-3xl md:text-xl'>Sign Out</button>
+              </a>
+            </Link>
           </div>
         </div>
         <div className='mx-auto p-4 md:p-8 md:w-1/2 lg:w-1/2 w-full self-center'>
@@ -38,13 +61,13 @@ const tasks = ({ tasks, categories }) => {
                 </a>
               </Link>
             </li>
-            {tasks.map((task, index) => (
+            {userTasks.map((task, index) => (
               <Link href={`/tasks/${task.task_id}`} key={index}>
                 <a>
                   <li
                     className={`bg-white p-3 my-3 rounded-lg shadow-2xl group flex items-center justify-between border-l-8 ${ task.is_done === true ? 'border-green-400' : 'border-red-400'}`}
                   >
-                    <p>{task.category_id}</p>
+                    <p>{categories.find(category => category.category_id === task.category_id).category_name}</p>
                     <p>{task.task_name}</p>
                     <div>
                       <UpdateTask task={task} />
@@ -57,7 +80,7 @@ const tasks = ({ tasks, categories }) => {
               </Link>
             ))}
           </ul>
-          <NewTask categories={categories}/>
+          <NewTask categories={categories} username={username}/>
         </div>
       </main>
     </>
