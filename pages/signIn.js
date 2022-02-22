@@ -13,7 +13,7 @@ const signIn = () => {
     e.preventDefault()
     console.log(username)
     if (!username) {
-      setError("Username is required !")
+      setError("Please fill in the required fields !")
     } else {
       setError("")
       fetch(`/api/users/${username}`)
@@ -22,17 +22,15 @@ const signIn = () => {
         if (data.error) {
           setError('Username does not exist !')
         } else {
-          console.log(data)
-          setTimeout(() => {
-            Router.push({
-              pathname: '/profile',
-              query: {
-                name: data.name,
-                username: data.username,
-                email: data.email
-              }
-            })
-          }, 1000);
+          alert(`Welcome ${data.name} !`)
+          Router.push({
+            pathname: '/profile',
+            query: {
+              name: data.name,
+              username: data.username,
+              email: data.email
+            }
+          })
         }
       })
       .catch(err => console.log(err))
