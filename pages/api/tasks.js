@@ -19,8 +19,8 @@ export default async (req, res) => {
 
       case "POST": {
         // Create a new task
-        const { task_name, username, category_id, is_done } = req.body;
-        const task = await createTask(task_name, username, category_id, is_done);
+        const { task_name, username, category_id } = req.body;
+        const task = await createTask(task_name, username, category_id);
         return res.status(200).json(task);
       }
 
