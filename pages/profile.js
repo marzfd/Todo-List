@@ -27,6 +27,24 @@ const profile = () => {
       .catch(err => console.log(err))
   }
 
+  const onTaskClick = () => {
+    fetch(`/api/users`)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+      })
+      .catch(err => console.log(err))
+
+    router.push({
+      pathname: '/tasks',
+      query: {
+        name,
+        username
+      }
+    })
+    console.log(name, username)
+  }
+
 
   return (
     <>
@@ -37,18 +55,15 @@ const profile = () => {
           </div>
           <div className='text-center md:space-y-10 space-y-3'>
             <Image src="/profile.jpg" alt="Profile" width={200} height={200} />
-            <p className='lg:text-3xl md:text-xl'>Hi {user.name} !</p>
+            <p className='lg:text-3xl md:text-xl'>Hi {name} !</p>
             <div>
-              <Link href='/tasks'>
-                <a>
-                  <button
-                    type="button"
-                    className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white w-full md:py-3 py-1 md:px-2 rounded-lg shadow-lg font-caveat text-xl md:text-2xl md:font-bold focus:outline-none'
-                  >
-                    Your Tasks
-                  </button>
-                </a>
-              </Link>
+              <button
+                type="button"
+                onClick={onTaskClick}
+                className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white w-full md:py-3 py-1 md:px-2 rounded-lg shadow-lg font-caveat text-xl md:text-2xl md:font-bold focus:outline-none'
+              >
+                Your Tasks
+              </button>
             </div>
           </div>
         </div>
