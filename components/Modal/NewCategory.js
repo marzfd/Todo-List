@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const NewTask = () => {
+const NewCategory = ({ username }) => {
   const [modal, setModal] = useState(false);
   const [category, setCategory] = useState('');
 
@@ -8,7 +8,6 @@ const NewTask = () => {
 
   const onSubmit = e => {
     e.preventDefault()
-    console.log(category);
     if (!category) {
       setError('Please enter a category name !')
     } else {
@@ -16,14 +15,14 @@ const NewTask = () => {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          category_name: category
+          category_name: category,
+          username: username
         })
       })
       .then(res => res.json())
       .then(data => {
         alert(data.message)
         window.location.reload()
-        console.log(data)
       })
       .catch(err => console.log(err))
     }
@@ -31,7 +30,7 @@ const NewTask = () => {
 
   return (
     <>
-      <button type='button' className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white w-full mt-5 py-2 px-4 rounded-lg focus:outline-none' onClick={toggle}>
+      <button type='button' className='text-sm md:text-lg bg-purple-700 hover:bg-purple-500 transition duration-300 text-white w-full mt-5 py-2 px-4 rounded-lg focus:outline-none' onClick={toggle}>
         Add New Category
       </button>
       {modal && (
@@ -64,4 +63,4 @@ const NewTask = () => {
   )
 };
 
-export default NewTask;
+export default NewCategory;

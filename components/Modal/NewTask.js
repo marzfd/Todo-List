@@ -11,7 +11,6 @@ const NewTask = ({ categories, username }) => {
 
   const onSubmit = e => {
     e.preventDefault()
-    console.log(task, categoryId);
     if (!task && !categoryId) {
       setError('Please enter all fields !')
     } else {
@@ -33,16 +32,18 @@ const NewTask = ({ categories, username }) => {
     }
   }
 
+  const userCategories = categories.filter(category => category.username === username)
+
   return (
     <>
       <button
         type='button'
         onClick={toggle}
-        className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white w-full mt-5 py-2 px-4 rounded-lg focus:outline-none'
+        className='text-sm md:text-lg bg-purple-700 hover:bg-purple-500 transition duration-300 text-white w-full mt-5 py-2 px-4 rounded-lg focus:outline-none'
       >
         Add New Task
       </button>
-      {modal && (
+      { modal && (
         <div className='fixed inset-0 bg-gray-900 bg-opacity-75 z-40 flex justify-center'>
           <div className='max-w-sm w-full bg-gradient-to-br from-orange-50 to-orange-300 rounded-lg shadow-xl z-50 h-min self-center'>
             <div className='relative p-10'>
@@ -66,8 +67,8 @@ const NewTask = ({ categories, username }) => {
                   onChange={e => setCategoryId(e.target.value)}
                   className='shadow appearance-none border rounded w-full py-2 px-3 text-purple-500 leading-tight focus:outline-none focus:shadow-outline border-purple-200 placeholder-purple-300' type='text' placeholder='Category Name' required>
                   <option value='' className='text-purple-300'>Choose a Category</option>
-                    {categories &&
-                      categories.map(category => (
+                    { userCategories &&
+                      userCategories.map(category => (
                         <option key={category.category_id} value={category.category_id}>{category.category_name}</option>
                     ))}
                 </select>
