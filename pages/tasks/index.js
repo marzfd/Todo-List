@@ -4,14 +4,14 @@ import NewTask from "../../components/Modal/NewTask";
 import UpdateTask from "../../components/Modal/UpdateTask";
 
 export async function getServerSideProps() {
-  const res = await fetch('http://localhost:3000/api/tasks');
-  const tasks = await res.json();
-  return { props: { tasks } }
+  const res1 = await fetch('http://localhost:3000/api/tasks');
+  const res2 = await fetch('http://localhost:3000/api/categories');
+  const tasks = await res1.json();
+  const categories = await res2.json();
+  return { props: { tasks, categories } }
 }
 
-
-
-const tasks = ({ tasks }) => {
+const tasks = ({ tasks, categories }) => {
   return (
     <>
       <main className='mx-auto lg:w-9/12 p-5 md:p-10 flex flex-wrap'>
@@ -57,7 +57,7 @@ const tasks = ({ tasks }) => {
               </Link>
             ))}
           </ul>
-          <NewTask />
+          <NewTask categories={categories}/>
         </div>
       </main>
     </>
