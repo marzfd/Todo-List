@@ -23,6 +23,7 @@ const NewTask = () => {
       .then(res => res.json())
       .then(data => {
         alert(data.message)
+        window.location.reload()
         console.log(data)
       })
       .catch(err => console.log(err))
