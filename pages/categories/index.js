@@ -39,6 +39,37 @@ const categories = ({ categories }) => {
   return (
     <>
       <main className='mx-auto lg:w-9/12 p-5 md:p-10'>
+        <div className='mb-5 space-x-4 text-right'>
+          <Link href='/signIn'>
+            <a>
+              <button
+              type='button'
+                className='bg-orange-500 hover:bg-orange-400 transition duration-300 text-white py-2 px-6 rounded-lg focus:outline-none text-xs md:text-sm'
+              >
+                Sign Out
+              </button>
+            </a>
+          </Link>
+          <Link
+            href={{
+              pathname: '/profile',
+              query: {
+                name,
+                username,
+                email
+              }
+            }}
+          >
+            <a>
+              <button
+                type='button'
+                className='bg-purple-700 hover:bg-purple-500 transition duration-300 text-white py-2 px-4 rounded-lg focus:outline-none text-xs md:text-sm'
+              >
+                Your Profile
+              </button>
+            </a>
+          </Link>
+        </div>
         <div className='flex flex-wrap'>
           <div className='mb-3'>
             <div className='lg:mb-6 mb-3 md:mt-10 sm:mt-1'>
