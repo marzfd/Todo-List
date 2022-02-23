@@ -13,18 +13,17 @@ const profile = () => {
   const user = { name, username, email }
 
   const onDelete = () => {
-    console.log(username)
-    fetch(`/api/users/${username}`, {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' }
-    })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data)
-        alert('User deleted Successfully !')
-        router.push('/')
+    if (window.confirm('Are you sure you want to delete your account?')) {
+      fetch(`/api/users/${username}`, {
+        method: 'DELETE'
       })
-      .catch(err => console.log(err))
+        .then(res => res.json())
+        .then(() => {
+          router.push('/')
+          // window.location.reload()
+        })
+        .catch(err => console.log(err))
+    }
   }
 
   return (
