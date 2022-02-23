@@ -10,10 +10,10 @@ export const getTask = async () => {
   }
 }
 
-export const getTaskById = async ( id ) => {
+export const getTaskById = async ( task_id ) => {
   try {
-    const task = await prisma.task.findOne({
-      where: { id }
+    const task = await prisma.task.findUnique({
+      where: { task_id }
     })
     return task
   }

@@ -1,5 +1,5 @@
 /* eslint-disable import/no-anonymous-default-export */
-import { getTask, getTaskById, createTask, updateTask, deleteTask } from "../../controller/tasks";
+import { getTask, getTaskById, createTask, updateTask, deleteTask } from "../../../controller/tasks";
 
 export default async (req, res) => {
   try {
