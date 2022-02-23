@@ -19,6 +19,26 @@ const categories = ({ categories }) => {
 
   const userCategories = categories.filter(category => category.username === username)
 
+  const handleDelete = category_id => {
+    if (window.confirm('Are you sure you want to delete this category?')) {
+      fetch(`/api/categories`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          category_id: category_id
+        })
+      })
+        .then(res => res.json())
+        .then(data => {
+          alert(data.message)
+          window.location.reload()
+        })
+        .catch(err => console.log(err))
+    }
+  }
+
+
+
   return (
     <>
       <main className='mx-auto lg:w-9/12 p-5 md:p-10'>
@@ -40,14 +60,16 @@ const categories = ({ categories }) => {
               <ul className='space-y-3'>
                 {userCategories.map((category, index) => (
                   <li key={index}
-                    className={'bg-white p-2 md:p-3 my-3 rounded-lg shadow-2xl flex items-center justify-between border-l-8 border-purple-400'}
+                    className={'group bg-white p-2 md:p-3 my-3 rounded-lg shadow-2xl flex items-center justify-between border-l-8 border-purple-400'}
                   >
                     <p className='text-xs md:text-base'>{category.category_name}</p>
-                    <div>
-                      <button type="button" className='opacity-0 group-hover:opacity-100 transition duration-300 text-white mx-1 focus:outline-none'>
-                        <svg className="h-6 w-6 text-red-500"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  strokeWidth="2"  strokeLinecap="round"  strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <line x1="15" y1="9" x2="9" y2="15" />  <line x1="9" y1="9" x2="15" y2="15" /></svg>
-                      </button>
-                    </div>
+                    <button
+                      type="button"
+                      onClick={() => handleDelete(category.category_id)}
+                      className='col-start-7 opacity-0 group-hover:opacity-100 transition duration-500 text-white mx-1 focus:outline-none'
+                    >
+                      <svg className="h-6 w-6 text-red-500"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  strokeWidth="2"  strokeLinecap="round"  strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <line x1="15" y1="9" x2="9" y2="15" />  <line x1="9" y1="9" x2="15" y2="15" /></svg>
+                    </button>
                   </li>
                 ))}
               </ul>

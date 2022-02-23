@@ -38,6 +38,23 @@ const tasks = ({ tasks, categories }) => {
       .catch(err => console.log(err))
   }
 
+  const handleDelete = task_id => {
+    if (window.confirm('Are you sure you want to delete this task?')) {
+      fetch(`/api/tasks`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          task_id: task_id
+        })
+      })
+        .then(res => res.json())
+        .then(() => {
+          window.location.reload()
+        })
+        .catch(err => console.log(err))
+    }
+  }
+
   return (
     <>
       <main className='mx-auto lg:w-9/12 p-5 md:p-10'>
@@ -98,13 +115,13 @@ const tasks = ({ tasks, categories }) => {
                   {userTasks.map((task, index) => (
                     <div key={index} className='group'>
                       <li
-                        className={`bg-white w-full p-3 my-3 group grid grid-cols-8 rounded-lg shadow-2xl items-center border-l-8 ${ task.is_done === true ? 'border-green-400' : 'border-red-400'}`}
+                        className={`bg-white w-full p-3 my-3 grid grid-cols-8 rounded-lg shadow-2xl items-center border-l-8 ${ task.is_done === true ? 'border-green-400' : 'border-red-400'}`}
                       >
                         <p className='text-xs md:text-base col-start-1 col-span-3'>{categories.find(category => category.category_id === task.category_id).category_name}</p>
                         <p className='text-xs md:text-base col-start-4 col-span-3'>{task.task_name}</p>
                         <button
                           type="button"
-
+                          onClick={() => handleDelete(task.task_id)}
                           className='col-start-7 opacity-0 group-hover:opacity-100 transition duration-500 text-white mx-1 focus:outline-none'
                         >
                           <svg className="h-6 w-6 text-red-500"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  strokeWidth="2"  strokeLinecap="round"  strokeLinejoin="round">  <circle cx="12" cy="12" r="10" />  <line x1="15" y1="9" x2="9" y2="15" />  <line x1="9" y1="9" x2="15" y2="15" /></svg>
