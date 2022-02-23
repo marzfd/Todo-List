@@ -11,29 +11,40 @@ const signIn = () => {
 
   const onSubmit = e => {
     e.preventDefault()
-    console.log(username)
     if (!username) {
       setError("Please fill in the required fields !")
     } else {
-      setError("")
-      fetch(`/api/users/${username}`)
-      .then(res => res.json())
-      .then(data => {
-        if (data.error) {
-          setError('Username does not exist !')
-        } else {
-          alert(`Welcome ${data.name} !`)
-          Router.push({
-            pathname: '/profile',
-            query: {
-              name: data.name,
-              username: data.username,
-              email: data.email
-            }
-          })
-        }
-      })
-      .catch(err => console.log(err))
+      fetch('/api/users')
+        .then(res => res.json())
+        .then(data => {
+          const user = data.find(user => user.username === username)
+          if (user) {
+            setError("")
+            fetch(`/api/users/${username}`)
+            .then(res => res.json())
+            .then(data => {
+              if (data.error) {
+                console.log(data.error)
+                setError('Username does not exist !')
+              } else {
+                alert(`Welcome ${data.name} !`)
+                Router.push({
+                  pathname: '/profile',
+                  query: {
+                    name: data.name,
+                    username: data.username,
+                    email: data.email
+                  }
+                })
+              }
+            })
+            .catch(err => console.log(err))
+          } else {
+            setError('Username does not exist !')
+          }
+        })
+        .catch(err => console.log(err))
+
     }
   }
 
