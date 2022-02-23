@@ -61,14 +61,17 @@ const NewTask = ({ categories, username }) => {
                   type='text'
                   value={task}
                   onChange={e => setTask(e.target.value)}
-                  className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-purple-200 placeholder-purple-300' type='text' placeholder='Task Name' required
+                  className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-purple-200 placeholder-purple-300'
+                  placeholder='Task Name'
                 />
               </div>
               <div className='mt-6'>
                 <select
                   value={categoryId}
                   onChange={e => setCategoryId(e.target.value)}
-                  className='shadow appearance-none border rounded w-full py-2 px-3 text-purple-500 leading-tight focus:outline-none focus:shadow-outline border-purple-200 placeholder-purple-300' type='text' placeholder='Category Name' required>
+                  className='shadow appearance-none border rounded w-full py-2 px-3 text-purple-500 leading-tight focus:outline-none focus:shadow-outline border-purple-200 placeholder-purple-300'
+                  placeholder='Category Name'
+                >
                   <option value='' className='text-purple-300'>Choose a Category</option>
                     { userCategories &&
                       userCategories.map(category => (
