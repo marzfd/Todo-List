@@ -1,11 +1,14 @@
 import { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const NewTask = ({ categories, username }) => {
   const [modal, setModal] = useState(false);
   const [task, setTask] = useState('');
   const [categoryId, setCategoryId] = useState('');
   const [error, setError] = useState('');
+
+  const router = useRouter();
 
   const toggle = () => setModal(!modal);
 
@@ -24,9 +27,9 @@ const NewTask = ({ categories, username }) => {
         })
       })
       .then(res => res.json())
-      .then(data => {
-        alert(data.message)
-        window.location.reload()
+      .then(() => {
+        toggle()
+        router.reload()
       })
       .catch(err => console.log(err))
     }
@@ -82,7 +85,12 @@ const NewTask = ({ categories, username }) => {
                   Add Task
                 </button>
               </div>
-              <Link href='/categories'>
+              <Link
+                href={{
+                  pathname: '/categories',
+                  query: { username }
+                }}
+              >
                 <a>
                   <div className='mt-6'>
                     <button

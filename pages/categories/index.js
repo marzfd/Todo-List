@@ -29,10 +29,7 @@ const categories = ({ categories }) => {
         })
       })
         .then(res => res.json())
-        .then(data => {
-          alert(data.message)
-          window.location.reload()
-        })
+        .then(() => router.reload())
         .catch(err => console.log(err))
     }
   }

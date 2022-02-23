@@ -1,8 +1,11 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 
 const NewCategory = ({ username }) => {
   const [modal, setModal] = useState(false);
   const [category, setCategory] = useState('');
+
+  const router = useRouter();
 
   const toggle = () => setModal(!modal);
 
@@ -20,9 +23,9 @@ const NewCategory = ({ username }) => {
         })
       })
       .then(res => res.json())
-      .then(data => {
-        alert(data.message)
-        window.location.reload()
+      .then(() => {
+        toggle()
+        router.reload()
       })
       .catch(err => console.log(err))
     }

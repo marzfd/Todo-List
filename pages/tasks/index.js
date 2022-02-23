@@ -32,9 +32,7 @@ const tasks = ({ tasks, categories }) => {
       })
     })
       .then(res => res.json())
-      .then(() => {
-        window.location.reload()
-      })
+      .then(() => router.reload())
       .catch(err => console.log(err))
   }
 
@@ -48,9 +46,7 @@ const tasks = ({ tasks, categories }) => {
         })
       })
         .then(res => res.json())
-        .then(() => {
-          window.location.reload()
-        })
+        .then(() => router.reload())
         .catch(err => console.log(err))
     }
   }

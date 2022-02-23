@@ -51,7 +51,7 @@ const signUp = () => {
         if (data.error) {
           setError('Username already exists !')
         } else {
-          alert(data.message)
+          alert(`Registered successfully ✅`)
           router.push('/signIn')
         }
       })
