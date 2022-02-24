@@ -26,7 +26,7 @@ model Category {
   category_name String
   username      String
   tasks         Task[]
-  users         User   @relation(fields: [username], references: [username])
+  users         User   @relation(fields: [username], references: [username], onDelete: Cascade)
 }
 
 model Task {
@@ -37,6 +37,6 @@ model Task {
   is_done     Boolean  @default(false)
   created_at  DateTime @default(now())
   updated_at  DateTime @updatedAt
-  users       User     @relation(fields: [username], references: [username])
-  categoreis  Category @relation(fields: [category_id], references: [category_id])
+  users       User     @relation(fields: [username], references: [username], onDelete: Cascade)
+  categoreis  Category @relation(fields: [category_id], references: [category_id], onDelete: Cascade)
 }
