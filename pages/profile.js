@@ -16,12 +16,14 @@ const profile = () => {
   const onDelete = () => {
     if (window.confirm('Are you sure you want to delete your account?')) {
       fetch(`/api/users/${username}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' }
       })
         .then(res => res.json())
         .then(() => {
-          router.push('/')
-          // window.location.reload()
+          setTimeout(() => {
+            router.push('/')
+          }, 1000)
         })
         .catch(err => console.log(err))
     }
