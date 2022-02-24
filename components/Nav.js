@@ -14,7 +14,7 @@ const Nav = () => {
             <ul className="flex md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
               <li>
                 <Link href="/signIn">
-                  <a className="block px-2 md:px-4 py-1 md:py-2 text-gray-700 rounded hover:bg-purple-400 hover:text-white focus:outline-none" aria-current="page">LOGIN</a>
+                  <a className="block mr-2 px-2 md:px-4 py-1 md:py-2 text-gray-700 rounded hover:bg-purple-400 hover:text-white focus:outline-none" aria-current="page">LOGIN</a>
                 </Link>
               </li>
               <li>
